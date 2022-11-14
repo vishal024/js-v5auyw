@@ -86,43 +86,44 @@ function customFlat(arr, depth) {
   arr.forEach((ar) => {
     if (Array.isArray(ar) && depth > 0) {
       result.push(...customFlat(ar, depth - 1));
-    }
-     else result.push(ar)
+    } else result.push(ar);
   });
-  return result
+  return result;
 }
 
 console.log(customFlat(arr));
 
-let counter=0;
- const getData=()=>{
-  console.log("fetching the data",counter)
-}
+let counter = 0;
+const getData = () => {
+  console.log('fetching the data', counter);
+};
 
-const debounce = function(fn,d){
-    let timer;
-     return function(){
-      let context = this;
-      args= arguments;
-      clearInterval(timer)
-       timer=setTimeout(()=>{
-         getData.apply(context,arguments)
-       },d)
-     }
-}
+const debounce = (fn, d)=> {
+  let timer;
+  return function (){
+    let context = this;
+    args = arguments;
+    clearInterval(timer);
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, d);
+  };
+};
 
-const doSomeMagic = debounce(getData,3000)
+const doSomeMagic = debounce(getData, 3000);
+document
+  .querySelector('#searchInput')
+  .addEventListener("onKeyup", doSomeMagic);
 
+// const person = {
+//   name:"Adtiya",
+//   city:"Dehradun",
+//   PrintDetails :  function(){
+//     console.log(this.name +" "+ "from" + " " +this.city)
+//   }
+// }
+// const person1 = {
+//   name="Vikas"
+// }
 
-const person = {
-  name:"Adtiya",
-  city:"Dehradun",
-  PrintDetails :  function(){
-    console.log(this.name +" "+ "from" + " " +this.city)
-  }
-}
-const person1 = {
-  name="Vikas"
-}
-
-person1.__proto__= person;
+// person1.__proto__= person;
